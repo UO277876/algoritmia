@@ -1,5 +1,5 @@
 # alg_AunonAndreaUO277876
-Repositorio para la asignatura de Algoritmia en el Grado de Ingeniería Informática del Software de la Universidad de Oviedo
+Repositorio para la asignatura de Algoritmia en el Grado de Ingeniería Informática del Software de la Universidad de Oviedo.
 
 ## Información
 **Estudiante**: Andrea Auñón Antúnez
