@@ -1,7 +1,5 @@
 package algestudiante.p2;
 
-import algestudiante.p2.Vector;
-
 /** Este programa sirve para ordenar n elementos
 	con el algoritmo mejor. Es el QUICKSORT
  */

@@ -1,7 +1,5 @@
 package algestudiante.p2;
 
-import algestudiante.p2.Vector;
-
 /** Este programa sirve para ordenar n elementos con un algoritmo QUICKSORT
 	Pero como selecciona como pivote el elemento primero de la partición, si se
 	le mete el array ordenado tiene un comportamiento fatal (cuadrático). 

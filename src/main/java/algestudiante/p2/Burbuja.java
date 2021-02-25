@@ -1,8 +1,5 @@
 package algestudiante.p2 ;
 
-import algestudiante.p2.Vector;
-
-
 public class Burbuja extends Vector
 {
 	public Burbuja(int nElementos) {
@@ -15,7 +12,7 @@ public class Burbuja extends Vector
 	@Override
 	public void ordenar() {
 		for(int i=0; i <= this.elements.length - 2; i++) {
-			for(int j = this.elements.length; j > i; j--) {
+			for(int j = this.elements.length - 1; j > i; j--) {
 				if(this.elements[j-1] > this.elements[j]) {
 					intercambiar(j-1,j);
 				}
