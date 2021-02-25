@@ -18,7 +18,16 @@ public class Seleccion extends Vector
 	 */
 	@Override
 	public void ordenar() {
-		// TODO: Implementación del método de ordenación
+		int posMenor = 0;
+		for(int i=0; i < this.elements.length - 1; i++) {
+			posMenor = i;
+			for(int j= i+1; j < this.elements.length; j++) {
+				if(this.elements[j] < this.elements[posMenor]) {
+					posMenor = j;
+				}
+			}
+			intercambiar(i,posMenor);
+		}
 	}  
 
 	@Override

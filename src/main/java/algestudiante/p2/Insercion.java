@@ -18,7 +18,16 @@ public class Insercion extends Vector
 	 */
 	@Override
 	public void ordenar() {
-		// TODO: Implementación del método de ordenación
+		
+		for(int i = 1; i < this.elements.length; i++) {
+			int x = this.elements[i];
+			int j = i - 1;
+			while(j >= 0 && x < this.elements[j]) {
+				this.elements[j+1] = this.elements[j];
+				j -= 1;
+			}
+			this.elements[j+1] = x;
+		}
 	} 
 
 	@Override
