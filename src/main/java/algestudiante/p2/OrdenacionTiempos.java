@@ -8,7 +8,7 @@ public class OrdenacionTiempos {
 	/** Este programa sirve para probar todos los algoritmos de ordenacion
 	 * */
 	public static void main (String arg []){
-		String opcion= arg[0];
+		String opcion= "";
 		
 		int[] it = new int[nTam];
 		int i= 0;
@@ -23,19 +23,19 @@ public class OrdenacionTiempos {
 		
 		
 		// Medir tiempo: Insercion
-		medirTiempos(new Insercion(n), it, opcion);
+		//medirTiempos(new Insercion(n), it, opcion);
 		
 		// Medir tiempo: Seleccion
-		medirTiempos(new Seleccion(n), it, opcion);
+		//medirTiempos(new Seleccion(n), it, opcion);
 		
 		// Medir tiempo: Burbuja
-		medirTiempos(new Burbuja(n), it, opcion);
+		//medirTiempos(new Burbuja(n), it, opcion);
 		
 		// Medir tiempo: RapidoFatal
-		medirTiempos(new RapidoFatal(n), it, opcion);
+		//medirTiempos(new RapidoFatal(n), it, opcion);
 		
 		// Medir tiempo: RapidoCentral
-		medirTiempos(new RapidoCentral(n), it, opcion);
+		//medirTiempos(new RapidoCentral(n), it, opcion);
 		
 		// Medir tiempo: RapidoMediana
 		medirTiempos(new RapidoMediana(n), it, opcion);

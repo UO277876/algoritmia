@@ -17,10 +17,13 @@ public class Seleccion extends Vector
 	@Override
 	public void ordenar() {
 		int posMenor = 0;
-		for(int i=0; i < this.elements.length - 1; i++) {
+		int tam = this.elements.length;
+		int[] vector = this.elements;
+		
+		for(int i=0; i < tam - 1; i++) {
 			posMenor = i;
-			for(int j= i+1; j < this.elements.length; j++) {
-				if(this.elements[j] < this.elements[posMenor]) {
+			for(int j=i+1; j < tam; j++) {
+				if(vector[j] < vector[posMenor]) {
 					posMenor = j;
 				}
 			}

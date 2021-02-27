@@ -11,9 +11,12 @@ public class Burbuja extends Vector
 	 */
 	@Override
 	public void ordenar() {
-		for(int i=0; i <= this.elements.length - 2; i++) {
-			for(int j = this.elements.length - 1; j > i; j--) {
-				if(this.elements[j-1] > this.elements[j]) {
+		int tam = this.elements.length;
+		int[] vector = this.elements;
+		
+		for(int i=0; i <= tam - 2; i++) {
+			for(int j = tam - 1; j > i; j--) {
+				if(vector[j-1] > vector[j]) {
 					intercambiar(j-1,j);
 				}
 			}

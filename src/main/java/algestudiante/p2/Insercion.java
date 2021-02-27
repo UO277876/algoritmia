@@ -15,16 +15,18 @@ public class Insercion extends Vector
 	 * Ordenación por inserción directa
 	 */
 	@Override
-	public void ordenar() {
+	public void ordenar() {	
+		int tam = this.elements.length;
+		int[] vector = this.elements;
 		
-		for(int i = 1; i < this.elements.length; i++) {
-			int x = this.elements[i];
+		for(int i = 1; i < tam; i++) {
+			int x = vector[i];
 			int j = i - 1;
-			while(j >= 0 && x < this.elements[j]) {
-				this.elements[j+1] = this.elements[j];
+			while(j >= 0 && x < vector[j]) {
+				vector[j+1] = vector[j];
 				j -= 1;
 			}
-			this.elements[j+1] = x;
+			vector[j+1] = x;
 		}
 	} 
 

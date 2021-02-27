@@ -5,7 +5,7 @@ public class OrdenacionPruebas {
 	/** Este programa sirve para probar todos los algoritmos de ordenacion
 	 * */
 	public static void main (String arg []){
-		int n= 10;  //tamaño del problema
+		int n= 20;  //tamaño del problema
 		
 		
 		// Prueba ordenación: Insercion
