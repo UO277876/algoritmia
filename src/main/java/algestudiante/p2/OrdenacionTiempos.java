@@ -3,12 +3,12 @@ package algestudiante.p2;
 
 public class OrdenacionTiempos {
 	private static int nTam= 20;
-	private static int nVeces= 1;
+	private static int nVeces= 10000;
 
 	/** Este programa sirve para probar todos los algoritmos de ordenacion
 	 * */
 	public static void main (String arg []){
-		String opcion= "";
+		String opcion= arg[0];
 		
 		int[] it = new int[nTam];
 		int i= 0;
@@ -23,19 +23,19 @@ public class OrdenacionTiempos {
 		
 		
 		// Medir tiempo: Insercion
-		//medirTiempos(new Insercion(n), it, opcion);
+		medirTiempos(new Insercion(n), it, opcion);
 		
 		// Medir tiempo: Seleccion
-		//medirTiempos(new Seleccion(n), it, opcion);
+		medirTiempos(new Seleccion(n), it, opcion);
 		
 		// Medir tiempo: Burbuja
-		//medirTiempos(new Burbuja(n), it, opcion);
+		medirTiempos(new Burbuja(n), it, opcion);
 		
 		// Medir tiempo: RapidoFatal
-		//medirTiempos(new RapidoFatal(n), it, opcion);
+		medirTiempos(new RapidoFatal(n), it, opcion);
 		
 		// Medir tiempo: RapidoCentral
-		//medirTiempos(new RapidoCentral(n), it, opcion);
+		medirTiempos(new RapidoCentral(n), it, opcion);
 		
 		// Medir tiempo: RapidoMediana
 		medirTiempos(new RapidoMediana(n), it, opcion);
