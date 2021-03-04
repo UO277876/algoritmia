@@ -8,5 +8,5 @@ Repositorio para la asignatura de Algoritmia en el Grado de Ingeniería Informá
 
 **Curso**: 2020-2021
 
-**URL del repositorio**: https://github.com/juanrperez/alg_AunonAndreaUO277876
+**URL del repositorio**: https://github.com/UO277876/alg_AunonAndreaUO277876
 
