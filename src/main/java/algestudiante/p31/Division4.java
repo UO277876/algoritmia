@@ -1,4 +1,4 @@
-package algestudiante.p3;
+package algestudiante.p31;
 
 /**
 	Es un método recursivo POR DIVISION

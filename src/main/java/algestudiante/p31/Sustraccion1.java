@@ -1,4 +1,4 @@
-package algestudiante.p3;
+package algestudiante.p31;
 
 /** 
 	Clase que modeliza T(n)= T(n-1) + O(1)
