@@ -18,6 +18,9 @@ public class Sustraccion4
 		else 
 		{ 
 			cont++;  // O(1)
+			// a = 3
+			// b = 2
+			// k = -
 			rec4 (n-2);
 			rec4 (n-2);
 			rec4 (n-2);

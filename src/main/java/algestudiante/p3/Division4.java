@@ -17,14 +17,19 @@ public class Division4
 		if (n<=0) 
 			cont++;
 		else
-		{ 
+		{ 	
+			// k = 2
 			for (int i=1;i<n;i++) {
 				for (int j=1;j<i;j++) {
 					cont++ ;     
 				}
 			}
-			rec4 (n/2);
-			rec4 (n/2);
+			// a = 4
+			// b = 3 (Por ejemplo para que a < b^k)
+			rec4 (n/3);
+			rec4 (n/3);
+			rec4 (n/3);
+			rec4 (n/3);
 		}
 		return true;   
 	}
