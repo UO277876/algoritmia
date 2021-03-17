@@ -17,7 +17,7 @@ public class InversionesTiempos {
 		// No tomamos tiempos de la primera ejecución ya que la primera ejecución es más lenta de lo normal
 		for (int i = 1; i <= numberFiles; i++) {
 			// Comprueba si es correcto para los nombres de paquetes empleados en tu proyecto
-			String fileName = Paths.get("").toAbsolutePath().toString() + "/src/main/java/alg77777777/p32/ranking" + i + ".txt";
+			String fileName = Paths.get("").toAbsolutePath().toString() + "/src/main/java/algestudiante/p32/datos/ranking" + i + ".txt";
 			System.out.println("Fichero: " + fileName);
 			
 			// Algoritmo DV
@@ -72,4 +72,5 @@ public class InversionesTiempos {
 		return elements;
 	}
 	
+
 }

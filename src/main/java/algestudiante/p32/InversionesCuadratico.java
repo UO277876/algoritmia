@@ -6,6 +6,11 @@ public class InversionesCuadratico {
 	
 	private int[] array;
 
+	/**
+	 * Constructor con un parámetro de la clase Inversiones
+	 * 
+	 * @param ranking, la lista de elementos a analizar
+	 */
 	public InversionesCuadratico(List<Integer> ranking) {
 		int pos = 0;
 		for(Integer num : ranking) {
@@ -14,11 +19,12 @@ public class InversionesCuadratico {
 		}
 	}
 
+	/**
+	 * Cuenta las inversiones y devuelve su número en forma de String
+	 * 
+	 * @return Una cadena de caracteres con el núm de inversiones
+	 */
 	public String start() {
-
-	}
-	
-	private int contInv1() {
 		int cont = 0;
 		int n = array.length;
 		
@@ -29,7 +35,8 @@ public class InversionesCuadratico {
 				}
 			}
 		}
-		return cont;
+		return String.valueOf(cont);
 	}
+	
 
 }
