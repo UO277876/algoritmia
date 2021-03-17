@@ -26,7 +26,7 @@ public class InversionesTiempos {
 	        long  t1 = System.currentTimeMillis();              
 	        System.out.println("Número de inversiones = " + inv1.start());                 				
 	        long  t2 = System.currentTimeMillis();              
-	        if(i>1) System.out.println("El tiempo para el algoritmo DV es: " + (t2-t1) + " milisegundos");
+	        if(i>=1) System.out.println("El tiempo para el algoritmo DV es: " + (t2-t1) + " milisegundos");
 	        
 	        // Algoritmo iterativo
 	        ranking = readRankingFromFile(fileName);
@@ -34,7 +34,7 @@ public class InversionesTiempos {
 	        t1 = System.currentTimeMillis();              
 	        System.out.println("Número de inversiones = " + inv2.start());                 				
 	        t2 = System.currentTimeMillis();              
-	        if(i>1)  System.out.println("El tiempo para el algortimo iterativo es: " + (t2-t1) + " milisegundos");
+	        if(i>=1)  System.out.println("El tiempo para el algortimo iterativo es: " + (t2-t1) + " milisegundos");
 
 	        System.out.println("\n****************************\n");
 		}	

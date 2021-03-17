@@ -4,7 +4,7 @@ import java.util.List;
 
 public class InversionesCuadratico {
 	
-	private int[] array;
+	private Integer[] array;
 
 	/**
 	 * Constructor con un parámetro de la clase Inversiones
@@ -12,11 +12,8 @@ public class InversionesCuadratico {
 	 * @param ranking, la lista de elementos a analizar
 	 */
 	public InversionesCuadratico(List<Integer> ranking) {
-		int pos = 0;
-		for(Integer num : ranking) {
-			array[pos] = num;
-			pos++;
-		}
+		this.array = new Integer[ranking.size()];
+		ranking.toArray(this.array);
 	}
 
 	/**
@@ -25,7 +22,7 @@ public class InversionesCuadratico {
 	 * @return Una cadena de caracteres con el núm de inversiones
 	 */
 	public String start() {
-		int cont = 0;
+		long cont = 0; // Tiene que ser long porque se necesita más memoria
 		int n = array.length;
 		
 		for (int i=0; i < n-1; i++) {

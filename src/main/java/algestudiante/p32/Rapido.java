@@ -11,10 +11,9 @@ public class Rapido
 
 	private static void rapirec (int iz,int de) 
 	{
-		if (de>iz) 
+		if (de > iz) 
 		{
 			int m= particion (iz,de);
-
 			rapirec (iz,m-1);
 			rapirec (m+1,de);
 		}
@@ -43,7 +42,9 @@ public class Rapido
 	private static void intercambiar(int i,int j)
 	{
 		int t;
-		t=v[i];v[i]=v[j];v[j]=t;
+		t=v[i];
+		v[i]=v[j];
+		v[j]=t;
 	}
 	
 	public static void imprimirVector(String etiqueta, int[] v, int izq, int der)
