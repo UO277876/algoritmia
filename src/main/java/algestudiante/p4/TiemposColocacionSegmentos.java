@@ -9,6 +9,20 @@ public class TiemposColocacionSegmentos {
 		long t1, t2;
 		int nVeces = 10;
 		
+		co = new ColocacionSegmentos("juego1");
+		co.devorador1();
+		System.out.println("");
+		co.devorador2();
+		System.out.println("");
+		co.devorador3();
+		
+		co = new ColocacionSegmentos("juego2");
+		co.devorador1();
+		System.out.println("");
+		co.devorador2();
+		System.out.println("");
+		co.devorador3();
+		
 		for (int n = 100; n < 100000000; n*=2) {
 
 			co = new ColocacionSegmentos(n);
