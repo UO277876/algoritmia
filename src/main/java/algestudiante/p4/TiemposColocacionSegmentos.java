@@ -24,6 +24,7 @@ public class TiemposColocacionSegmentos {
 			long tMedio = t2 - t1;
 			System.out.println(n + "\t" + tMedio);
 		}
+		
 	}
 	
 
