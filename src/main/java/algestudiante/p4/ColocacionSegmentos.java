@@ -80,7 +80,7 @@ public class ColocacionSegmentos {
 		double x = 0;
 		double y = v[1];
 		double m = (x+y)/2;
-		//System.out.println("S0"+"("+x+","+y+") = "+m);
+		System.out.println("S0"+"("+x+","+y+") = "+m);
 		int it = 1;
 		
 		//2. Inicialización del sumatorio
@@ -94,12 +94,12 @@ public class ColocacionSegmentos {
 			m = (x+y)/2;
 			pufosa += m;
 			
-			//System.out.println("S"+it+"("+x+","+y+"), punto medio = "+m);
+			System.out.println("S"+it+"("+x+","+y+"), punto medio = "+m);
 			it++;
 			aux++;
 		}
 		
-		//System.out.println("Coste DEVORADOR1 = " + pufosa + " pufosos");
+		System.out.println("Coste DEVORADOR1 = " + pufosa + " pufosos");
 	}
 	
 	public void devorador2() {
@@ -110,7 +110,7 @@ public class ColocacionSegmentos {
 		double x = 0;
 		double y = v[v.length - 1];
 		double m = (x+y)/2;
-		//System.out.println("S0"+"("+x+","+y+"), punto medio = "+m);
+		System.out.println("S0"+"("+x+","+y+"), punto medio = "+m);
 		int it = 1;
 		
 		//2. Inicialización del sumatorio
@@ -124,12 +124,12 @@ public class ColocacionSegmentos {
 			m = (x+y)/2;
 			
 			pufosa += m;
-			//System.out.println("S"+it+"("+x+","+y+"), punto medio = "+m);
+			System.out.println("S"+it+"("+x+","+y+"), punto medio = "+m);
 			it++;
 			aux--;
 		}
 		
-		//System.out.println("Coste DEVORADOR2 = " + pufosa + " pufosos");
+		System.out.println("Coste DEVORADOR2 = " + pufosa + " pufosos");
 	}
 	
 	public void devorador3() {
@@ -140,7 +140,7 @@ public class ColocacionSegmentos {
 		double x = 0;
 		double y = v[1];
 		double m = (x+y)/2;
-		//System.out.println("S0"+"("+x+","+y+"), punto medio = "+m);
+		System.out.println("S0"+"("+x+","+y+"), punto medio = "+m);
 		int it = 1;
 		
 		//2. Inicialización del sumatorio
@@ -154,12 +154,12 @@ public class ColocacionSegmentos {
 			m = (x+y)/2;
 			
 			pufosa += m;
-			//System.out.println("S"+it+"("+x+","+y+"), punto medio = "+m);
+			System.out.println("S"+it+"("+x+","+y+"), punto medio = "+m);
 			it++;
 			aux++;
 		}
 		
-		//System.out.println("Coste DEVORADOR3 = " + pufosa + " pufosos");
+		System.out.println("Coste DEVORADOR3 = " + pufosa + " pufosos");
 	}
 	
 	// QUICKSORT
