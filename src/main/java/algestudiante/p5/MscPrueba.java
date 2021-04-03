@@ -4,10 +4,10 @@ public class MscPrueba {
 	
 	public static void main(String arg []) {
 		
-		String str1 = arg[0]; // primera secuencia
-		String str2 = arg[1]; // segunda secuencia
+		String str1 = "GCCCTAGCG"; // primera secuencia
+		String str2 = "GCGCAATG"; // segunda secuencia
 		
-		System.out.println("PROGRAMACIÓN DINÁMICA:");
+		System.out.println("PROGRAMACIï¿½N DINï¿½MICA:");
 		MSC msc = new MSC(str1, str2);
 		System.out.println("Inicializando la table...");
 		msc.iniTabla();
