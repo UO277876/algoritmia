@@ -8,8 +8,8 @@ public class MSC {
 	String str1; // primera cadena
 	String str2; // segunda cadena
 	String result; // candena con el resultado
-	int size1; // tamaño de la cadena 1
-	int size2; // tamaño de la cadena 2
+	int size1; // tamaï¿½o de la cadena 1
+	int size2; // tamaï¿½o de la cadena 2
 	
 	/**
 	 * Constructor
@@ -24,12 +24,12 @@ public class MSC {
 		size1 = str1.length();
 		size2 = str2.length();
 		result = "";
-		table = new CellTable[size1][size2]; // tabla empleada en programación dinámica 
+		table = new CellTable[size1][size2]; // tabla empleada en programaciï¿½n dinï¿½mica 
 	}
 	
 	/**
 	 * Constructor empleado para medir tiempos
-	 * @param n tamaño de las cadena generadas aleatoriamente 
+	 * @param n tamaï¿½o de las cadena generadas aleatoriamente 
 	 */
 	public MSC(int n) {
 		str1 = "*" + this.genSecuenciaAleatoria(n);
@@ -42,7 +42,7 @@ public class MSC {
 	
 	/**
 	 * Genera una secuencia aleatoria 
-	 * @param n tamaño de la secuencia
+	 * @param n tamaï¿½o de la secuencia
 	 * @return secuencia aleatoria, una cadena con caracters A, C, G and T.
 	 */
 	private String genSecuenciaAleatoria(int n){
@@ -55,7 +55,7 @@ public class MSC {
 	}
 	
 	/**
-	 * Inicialización de los valores de la tabla
+	 * Inicializaciï¿½n de los valores de la tabla
 	 */
 	public void iniTabla() {
 		for (int j=0; j<size2; j++)
@@ -65,7 +65,7 @@ public class MSC {
 	
 	
 	/**
-	 * Impresión de los valores de la tabla
+	 * Impresiï¿½n de los valores de la tabla
 	 */
 	public void imprimirTabla() {
 		System.out.printf("%11s", "*");
@@ -91,28 +91,70 @@ public class MSC {
 	} 
 
 	public class CellTable{
-		public int value; // valor para programación dinámica
-		public int iPrev; //"índice" a caracter de la cadena 1 empleada para calcular el valor 
-		public int jPrev; //"índice" a caracter de la cadena 2 empleada para calcular el valor
+		public int value; // valor para programaciï¿½n dinï¿½mica
+		public int iPrev; //"ï¿½ndice" a caracter de la cadena 1 empleada para calcular el valor 
+		public int jPrev; //"ï¿½ndice" a caracter de la cadena 2 empleada para calcular el valor
 	}
 	
 	/**
-	 * Rellena la tabla para la programación dinámica
+	 * Rellena la tabla para la programaciï¿½n dinï¿½mica
 	 */
 	public void rellenaTabla(){
-		// TODO: completa la tabla de programación dinámica con una celda (value, iPrev and jPrev) para cada entrada
+		// TODO: completa la tabla de programaciï¿½n dinï¿½mica con una celda (value, iPrev and jPrev) para cada entrada
+		
+		for (int i=0; i < size1; i++) {
+            for (int j=0; j < size2; j++) {
+                if (i == 0 || j == 0) { // Caso bÃ¡sico
+                    table[i][j].value = 0;
+                    table[i][j].iPrev = 0;
+                    table[i][j].jPrev = 0;
+                } else {
+                    int izq = table[i][j-1].value;
+                    int arr = table[i-1][j].value;
+                    int diag = table[i-1][j-1].value;
+                    
+    				int index = maximo(izq,arr,diag);	
+                    if(index == 1) {
+                    	table[i][j].value = table[i][j-1].value;
+                    	table[i][j].iPrev = i;
+                        table[i][j].jPrev = j-1;
+                    } else if(index == 2) {
+                    	table[i][j].value = table[i-1][j].value;
+                    	table[i][j].iPrev = i-1;
+                        table[i][j].jPrev = j;
+                    } else {
+                    	table[i][j].value = table[i-1][j-1].value;
+                    	table[i][j].iPrev = i-1;
+                        table[i][j].jPrev = j-1;
+                    
+    				}
+                    
+                    // Para que cambie a uno porque coinciden los caracteres
+    				if(str1.charAt(i) == str2.charAt(j) && izq == 0 && arr == 0 && diag == 0) {
+    					table[i][j].value++;
+    				}
+                }
+            }
+        }
 	}
 	
 	/**
-	 * Encuentra el índice del máxmimo de tres valores diferentes
-	 * @param num1 e.g. input L1=MSC(S1’, S2). S1’ S1 without its last char
+	 * Encuentra el ï¿½ndice del mï¿½xmimo de tres valores diferentes
+	 * @param num1 e.g. input L1=MSC(S1ï¿½, S2). S1ï¿½ S1 without its last char
 	 * @param num2 e.g. input L1=MSC(S1, S2'). S2' S2 without its last char
-	 * @param num3 e.g. input L3=MSC(S1’, S2’) or L3+1 when both current chars are equal
-	 * @return índice del máximo
+	 * @param num3 e.g. input L3=MSC(S1ï¿½, S2ï¿½) or L3+1 when both current chars are equal
+	 * @return ï¿½ndice del mï¿½ximo
 	 */
 	private int maximo(int num1, int num2, int num3) {
-		// TODO (optional): a partir de tres valores diferentes (p. e. longitud de una secuencia) devuelve el índice del máximo
-		return -1;
+		// TODO (optional): a partir de tres valores diferentes (p. e. longitud de una secuencia) devuelve el ï¿½ndice del mï¿½ximo
+		
+		if(num1 > num2 && num1 > num3) {
+			return 1;
+		} else if(num2 > num1 && num2 > num3) {
+			return 2;
+		} else {
+			return 3;
+		}
 	}
 	
 	/**
@@ -120,7 +162,12 @@ public class MSC {
 	 * @param v si verdadero se propocionan mensajas que muestran los pasos seguidos
 	 */
 	public void encontarMSC(boolean v){
-		// TODO: después de rellenas la tabla, reconstruye la MSC empezando por el último elemento
+		// TODO: despuï¿½s de rellenas la tabla, reconstruye la MSC empezando por el ï¿½ltimo elemento
+		for(int i = size1 - 1; i >= 0; i--) {
+			for(int j = size2 - 1; j >= 0; j--) {
+				
+			}
+		}
 	}
 
 }
