@@ -101,6 +101,8 @@ public class MSC {
 	 */
 	public void rellenaTabla(){
 		// TODO: completa la tabla de programaci�n din�mica con una celda (value, iPrev and jPrev) para cada entrada
+		int cad1 = 0;
+		int cad2 = 0;
 		
 		for (int i=0; i < size1; i++) {
             for (int j=0; j < size2; j++) {
@@ -109,33 +111,46 @@ public class MSC {
                     table[i][j].iPrev = 0;
                     table[i][j].jPrev = 0;
                 } else {
-                    int izq = table[i][j-1].value;
-                    int arr = table[i-1][j].value;
-                    int diag = table[i-1][j-1].value;
+                    int L1 = table[i][j-1].value; // IZQ
+                    int L2 = table[i-1][j].value; // ARRIBA
+                    int L3 = table[i-1][j-1].value; // DIAGONAL
                     
-    				int index = maximo(izq,arr,diag);	
-                    if(index == 1) {
+    				int index = maximo(L1,L2,L3);
+    				
+                    if(index == 1) { 
                     	table[i][j].value = table[i][j-1].value;
                     	table[i][j].iPrev = i;
                         table[i][j].jPrev = j-1;
+                        
+                        cad1 = j-1;
+                        cad2 = i;
+                        
                     } else if(index == 2) {
                     	table[i][j].value = table[i-1][j].value;
                     	table[i][j].iPrev = i-1;
                         table[i][j].jPrev = j;
+                        
+                        cad1 = j;
+                        cad2 = i-1;                        
                     } else {
                     	table[i][j].value = table[i-1][j-1].value;
                     	table[i][j].iPrev = i-1;
                         table[i][j].jPrev = j-1;
+                        
+                        cad1 = j-1;
+                        cad2 = i-1;
+                        
+                     // Para que cambie a uno porque coinciden los caracteres
+        				if(str1.charAt(cad1) == str2.charAt(cad2)) {
+        					table[i][j].value++;
+        				}
                     
     				}
                     
-                    // Para que cambie a uno porque coinciden los caracteres
-    				if(str1.charAt(i) == str2.charAt(j) && izq == 0 && arr == 0 && diag == 0) {
-    					table[i][j].value++;
-    				}
                 }
             }
         }
+		System.out.println(result);
 	}
 	
 	/**
@@ -145,12 +160,12 @@ public class MSC {
 	 * @param num3 e.g. input L3=MSC(S1�, S2�) or L3+1 when both current chars are equal
 	 * @return �ndice del m�ximo
 	 */
-	private int maximo(int num1, int num2, int num3) {
+	private int maximo(int L1, int L2, int L3) {
 		// TODO (optional): a partir de tres valores diferentes (p. e. longitud de una secuencia) devuelve el �ndice del m�ximo
 		
-		if(num1 > num2 && num1 > num3) {
+		if(L1 > L2 && L1 > L3) {
 			return 1;
-		} else if(num2 > num1 && num2 > num3) {
+		} else if(L2 > L1 && L2 > L3) {
 			return 2;
 		} else {
 			return 3;
@@ -163,10 +178,24 @@ public class MSC {
 	 */
 	public void encontarMSC(boolean v){
 		// TODO: despu�s de rellenas la tabla, reconstruye la MSC empezando por el �ltimo elemento
-		for(int i = size1 - 1; i >= 0; i--) {
-			for(int j = size2 - 1; j >= 0; j--) {
-				
+		CellTable ct = table[size1 - 1][size2 - 1];
+		int i = size1 - 1;
+		
+		while (i != 0) {			
+			if(table[ct.iPrev][ct.jPrev].value < ct.value) {				
+				result = str1.charAt(i) + result;
+				i = ct.iPrev;
 			}
+			
+			if(v) {
+				System.out.println("Fila: " + ct.iPrev);
+				System.out.println("Columna: " + ct.jPrev);
+				System.out.println("Puntero al valor: " + ct.value);
+				System.out.println("MSC actual: " + result);
+				System.out.println("-------------------------------");
+			}
+			
+			ct = table[ct.iPrev][ct.jPrev];
 		}
 	}
 
