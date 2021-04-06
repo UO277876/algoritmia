@@ -111,37 +111,32 @@ public class MSC {
                     table[i][j].iPrev = 0;
                     table[i][j].jPrev = 0;
                 } else {
+                	// Como el recursivo
                     int L1 = table[i][j-1].value; // IZQ
                     int L2 = table[i-1][j].value; // ARRIBA
                     int L3 = table[i-1][j-1].value; // DIAGONAL
                     
     				int index = maximo(L1,L2,L3);
     				
-                    if(index == 1) { 
+                    if(index == 1) { // CASO L1
                     	table[i][j].value = table[i][j-1].value;
                     	table[i][j].iPrev = i;
                         table[i][j].jPrev = j-1;
+
                         
-                        cad1 = j-1;
-                        cad2 = i;
-                        
-                    } else if(index == 2) {
+                    } else if(index == 2) { // CASO L2
                     	table[i][j].value = table[i-1][j].value;
                     	table[i][j].iPrev = i-1;
                         table[i][j].jPrev = j;
-                        
-                        cad1 = j;
-                        cad2 = i-1;                        
-                    } else {
+                   
+                    } else { // CASO L3
                     	table[i][j].value = table[i-1][j-1].value;
                     	table[i][j].iPrev = i-1;
                         table[i][j].jPrev = j-1;
                         
-                        cad1 = j-1;
-                        cad2 = i-1;
                         
                      // Para que cambie a uno porque coinciden los caracteres
-        				if(str1.charAt(cad1) == str2.charAt(cad2)) {
+        				if(str1.charAt(i - 1) == str2.charAt(j - 1)) { // CASO ESPECIAL DE L3
         					table[i][j].value++;
         				}
                     
