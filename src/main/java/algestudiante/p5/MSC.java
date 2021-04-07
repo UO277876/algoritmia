@@ -101,8 +101,6 @@ public class MSC {
 	 */
 	public void rellenaTabla(){
 		// TODO: completa la tabla de programaci�n din�mica con una celda (value, iPrev and jPrev) para cada entrada
-		int cad1 = 0;
-		int cad2 = 0;
 		
 		for (int i=0; i < size1; i++) {
             for (int j=0; j < size2; j++) {
