@@ -35,13 +35,16 @@ public class MejorLista {
 		this.mejorBloqueB = new ArrayList<Cancion>();
 		
 		this.nCanciones = n;
-
+		this.canciones = new Cancion[n];
+		
 		int sum = 0;
 		int tiempo = 0;
 		for(int i = 0; i < n; i++) {
-			tiempo = (int)Math.random()*(301 - 120) + 120;
+			tiempo = (int) (Math.random()*((300 + 1) - 120) + 120);
 			sum += tiempo;
-			canciones[i] = new Cancion(tiempo,"1234", (int) Math.random()*(5001 - 2000) + 2000);
+
+			int puntuacion =  (int) (Math.random()*((5000 + 1) - 2000) + 2000);
+			canciones[i] = new Cancion(tiempo,"1234",puntuacion);
 		}
 		
 		this.t = sum/2;
