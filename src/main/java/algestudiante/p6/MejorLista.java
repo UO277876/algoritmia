@@ -5,16 +5,35 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MejorLista {
 	
 	private int nCanciones;
+	private int t;
 	
+	private int sumaPuntuaciones;
+	
+	private Cancion[] canciones;
+	private List<Cancion> bloqueA;
+	private List<Cancion> bloqueB;
+	
+	private int mejorPunt;
+	private List<Cancion> mejorBloqueA;
+	private List<Cancion> mejorBloqueB;
 	
 	/**
 	 * Constructor con un parámetro de la clase Streaming
 	 */
-	public MejorLista(String file) {
+	public MejorLista(String file, int t) {
+		this.t = t * 60;
+		
+		this.bloqueA = new ArrayList<Cancion>();
+		this.bloqueB = new ArrayList<Cancion>();
+		this.mejorBloqueA = new ArrayList<Cancion>();
+		this.mejorBloqueB = new ArrayList<Cancion>();
+		
 		readDatosFromFile(file);
 	}
 	
@@ -29,7 +48,8 @@ public class MejorLista {
 		BufferedReader fich = null;
 		String line;
 		int pos = 0;
-		String fileName = Paths.get("").toAbsolutePath().toString() + "/src/main/java/algestudiante/p4/datos/"+ file +".txt";
+		int index = 0;
+		String fileName = Paths.get("").toAbsolutePath().toString() + "/src/main/java/algestudiante/p6/datos/"+ file +".txt";
 
 		try {
 			// abrimos el fichero
@@ -37,12 +57,14 @@ public class MejorLista {
 			line = fich.readLine(); // Primer elemento del fichero
 			while (line != null) {
 				if(pos == 0) {
-					this.v = new double[Integer.valueOf(line) + 1];
-					this.v[0] = Integer.valueOf(line);
+					this.nCanciones = Integer.valueOf(line);
+					this.canciones = new Cancion[nCanciones];
 					line = fich.readLine();
 					pos++;
 				} else {
-					this.v[pos] = Integer.valueOf(line);
+					String[] parts = line.split("\t");
+					introducirCancion(parts, index);
+					index++;
 					line = fich.readLine();
 					pos++;
 				}
@@ -59,6 +81,134 @@ public class MejorLista {
 					System.out.println("Error cerrando el fichero: "+fileName);
 					e.printStackTrace();
 				}
+		}
+	}
+	
+	/**
+	 * Crea la nueva canción para la lista de canciones
+	 * 
+	 * @param parts, las partes de cada canción
+	 * @param index, la fila donde va en el vector
+	 */
+	private void introducirCancion(String[] parts, int index) {
+		String name = parts[0];
+		int puntuacion = Integer.valueOf(parts[2]);
+		
+		String[] time = parts[1].split(":");
+		int min = Integer.valueOf(time[0]);
+		int seg = Integer.valueOf(time[1]);
+		
+		seg += min*60;
+		
+		canciones[index] = new Cancion(seg,name,puntuacion);
+	}
+	
+	/**
+	 * Comprueba la duración del bloque A
+	 */
+	private boolean comprobarBloqueA() {
+		int sum = 0;
+		for(Cancion ca : bloqueA) {
+			sum += ca.getSegundos();
+		}
+		
+		if(sum < t) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Comprueba la duración del bloque B
+	 */
+	private boolean comprobarBloqueB() {
+		int sum = 0;
+		for(Cancion ca : bloqueB) {
+			sum += ca.getSegundos();
+		}
+		
+		if(sum < t) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void backtracking(int n) {
+		if (n == nCanciones) {
+			if(sumaPuntuaciones > mejorPunt) {
+				mejorBloqueA.clear();
+				mejorBloqueB.clear();
+				
+				for(Cancion ca : bloqueA) {
+					mejorBloqueA.add(ca);
+				}
+				
+				for(Cancion ca : bloqueB) {
+					mejorBloqueB.add(ca);
+				}
+				
+				mejorPunt = sumaPuntuaciones;
+			}
+			
+		} else {
+			for (int i = 0; i <= 2; i++) {
+				
+				// Añadimos a bloques
+				if (i == 1) {
+					bloqueA.add(canciones[n]);
+					sumaPuntuaciones += canciones[n].getPuntuacion();
+				} 
+				
+				if(i == 2) {
+					bloqueB.add(canciones[n]);
+					sumaPuntuaciones += canciones[n].getPuntuacion();
+				}
+				
+				// Poda
+				if(comprobarBloqueA() && comprobarBloqueB()) {
+					backtracking(n + 1);
+				}
+				 
+				// Deshacemos
+				if (i == 1) {
+					bloqueA.remove(canciones[n]);
+
+					sumaPuntuaciones -= canciones[n].getPuntuacion();
+				}
+
+				if (i == 2) {
+					bloqueB.remove(canciones[n]);
+
+					sumaPuntuaciones -= canciones[n].getPuntuacion();
+				}
+
+			}
+		}
+	}
+	
+	public void print() {
+		System.out.println("Número de canciones: " + nCanciones);
+		System.out.println("");
+		System.out.println("Lista de canciones: ");
+		
+		for(Cancion ca : canciones) {
+			System.out.println("id: " + ca.getName() + " segundos: " + ca.getSegundos()/60 + ":" + ca.getSegundos()%60 + " puntuacion: " + ca.getPuntuacion());
+		}
+		
+		System.out.println("Tamaño de los bloques: " + t/60 + ":" + t%60);
+		System.out.println("Total puntuación: " + mejorPunt);
+		System.out.println("");
+		
+		System.out.println("Mejor Bloque A:");
+		for(Cancion ca : mejorBloqueA) {
+			System.out.println("id: " + ca.getName() + " segundos: " + ca.getSegundos()/60 + ":" + ca.getSegundos()%60 + " puntuacion: " + ca.getPuntuacion());
+		}
+		
+		System.out.println("Mejor Bloque B:");
+		for(Cancion ca : mejorBloqueB) {
+			System.out.println("id: " + ca.getName() + " segundos: " + ca.getSegundos()/60 + ":" + ca.getSegundos()%60 + " puntuacion: " + ca.getPuntuacion());
 		}
 	}
 	
