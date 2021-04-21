@@ -11,9 +11,9 @@ public class MejorListaTiempos {
 		
 		long t1, t2;
 		int nVeces = 100;
-		
-		for (int n = 100; n < 100000000; n*=2) {
-			mj = new MejorLista("Lista01",n);
+		int index = 2;
+		for (int n = 5; n < 31; n*=index) {
+			mj = new MejorLista(n);
 
 			t1 = System.currentTimeMillis();
 			
@@ -25,6 +25,7 @@ public class MejorListaTiempos {
 
 			long tMedio = t2 - t1;
 			System.out.println(n + "\t" + tMedio);
+			index++;
 		}
 	}
 }

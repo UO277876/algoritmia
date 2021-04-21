@@ -24,7 +24,31 @@ public class MejorLista {
 	private List<Cancion> mejorBloqueB;
 	
 	/**
-	 * Constructor con un parámetro de la clase Streaming
+	 * Constructor con dos parámetros de la clase MejorLista
+	 */
+	public MejorLista(int n) {
+		this.t = t * 60;
+		
+		this.bloqueA = new ArrayList<Cancion>();
+		this.bloqueB = new ArrayList<Cancion>();
+		this.mejorBloqueA = new ArrayList<Cancion>();
+		this.mejorBloqueB = new ArrayList<Cancion>();
+		
+		this.nCanciones = n;
+
+		int sum = 0;
+		int tiempo = 0;
+		for(int i = 0; i < n; i++) {
+			tiempo = (int)Math.random()*(301 - 120) + 120;
+			sum += tiempo;
+			canciones[i] = new Cancion(tiempo,"1234", (int) Math.random()*(5001 - 2000) + 2000);
+		}
+		
+		this.t = sum/2;
+	}
+	
+	/**
+	 * Constructor con dos parámetros de la clase MejorLista
 	 */
 	public MejorLista(String file, int t) {
 		this.t = t * 60;
