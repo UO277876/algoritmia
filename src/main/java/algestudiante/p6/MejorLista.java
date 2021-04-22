@@ -12,6 +12,7 @@ public class MejorLista {
 	
 	private int nCanciones;
 	private int t;
+	private int cont;
 	
 	private int sumaPuntuaciones;
 	
@@ -28,6 +29,7 @@ public class MejorLista {
 	 */
 	public MejorLista(int n) {
 		this.t = t * 60;
+		this.cont = 0;
 		
 		this.bloqueA = new ArrayList<Cancion>();
 		this.bloqueB = new ArrayList<Cancion>();
@@ -55,6 +57,7 @@ public class MejorLista {
 	 */
 	public MejorLista(String file, int t) {
 		this.t = t * 60;
+		this.cont = 0;
 		
 		this.bloqueA = new ArrayList<Cancion>();
 		this.bloqueB = new ArrayList<Cancion>();
@@ -164,6 +167,7 @@ public class MejorLista {
 	
 	public void backtracking(int n) {
 		if (n == nCanciones) {
+			this.cont++;
 			if(sumaPuntuaciones > mejorPunt) {
 				mejorBloqueA.clear();
 				mejorBloqueB.clear();
@@ -237,6 +241,9 @@ public class MejorLista {
 		for(Cancion ca : mejorBloqueB) {
 			System.out.println("id: " + ca.getName() + " segundos: " + ca.getSegundos()/60 + ":" + ca.getSegundos()%60 + " puntuacion: " + ca.getPuntuacion());
 		}
+		
+		System.out.println("");
+		System.out.println("Nodos hijo: " + this.cont);
 	}
 	
 
