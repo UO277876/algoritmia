@@ -5,7 +5,7 @@ public class MejorListaTiempos {
 	static MejorLista mjt,mj;
 	
 	public static void main(String[] args) {
-		// Corrección
+		// Corrección para poder probar ejemplos
 		// NOTA: Del fichero SOLO el nombre, no la terminación ".txt"
 		String fichero = args[0];
 		int tam = Integer.valueOf(args[1]);
@@ -13,6 +13,7 @@ public class MejorListaTiempos {
 		mj.backtracking(0);
 		mj.print();
 		
+		System.out.println("");
 		long t1, t2;
 		int nVeces = 1;
 		int index = 1;
@@ -28,7 +29,6 @@ public class MejorListaTiempos {
 			t2 = System.currentTimeMillis();
 
 			long tMedio = t2 - t1;
-			System.out.println(index);
 			System.out.println(n + "\t" + tMedio);
 			index++;
 		}
