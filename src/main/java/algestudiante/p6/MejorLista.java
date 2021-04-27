@@ -24,6 +24,18 @@ public class MejorLista {
 	private List<Cancion> mejorBloqueA;
 	private List<Cancion> mejorBloqueB;
 	
+	public static void main(String[] args) {
+		// Corrección para poder probar ejemplos
+		// NOTA: Del fichero SOLO el nombre, no la terminación ".txt"
+		String fichero = args[0];
+		int tam = Integer.valueOf(args[1]);
+		MejorLista mj = new MejorLista(fichero,tam);
+		mj.backtracking(0);
+		mj.print();
+		
+		System.out.println("");
+	}
+	
 	/**
 	 * Constructor con dos parámetros de la clase MejorLista
 	 */
