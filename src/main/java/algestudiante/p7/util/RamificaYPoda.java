@@ -31,7 +31,7 @@ public class RamificaYPoda
 	 * Método principal que implementa la ejecución de la técnica Ramifica y poda
 	 * @param nodoRaiz	Le pasamos el nodo raíz para el problema que queremos resolver
 	 */
-	protected void ramificaYPoda(Estado nodoRaiz) 
+	public void ramificaYPoda(Estado nodoRaiz) 
 	{ 
 		cola.insertar(nodoRaiz); 
 

@@ -2,6 +2,7 @@ package algestudiante.p7;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import algestudiante.p7.util.Estado;
 
@@ -14,14 +15,17 @@ public class EstadosRP extends Estado
 	// Datos comunes a todos los estados, por eso los declaramos "static"
 	private static int tmax;				// Tiempo máximo
 	private static CancionRP[] canciones;		// Lista de canciones
-	private static boolean traza= true;	// permite activar o desactivar traza
+	private static boolean traza= false;	// permite activar o desactivar traza
 
 	// Estado
-	private int[] solParcial;				// solParcial[i]=k es al trabajador i se le asigna la tarea k 
-	private boolean[] tareaConTrabajador;	// Marca las tareas ya asignadas
+	private int[] solParcial;				
+	private boolean[] cancionMarcada;	
 	
 	private int duracionActual;
 	private int puntuacionActual;
+	
+	private List<CancionRP> bloqueA;
+	private List<CancionRP> bloqueB;
 	
 	/**
 	 * Constructor para crear el estado inicial,
@@ -39,13 +43,12 @@ public class EstadosRP extends Estado
 		this.puntuacionActual = 0;
 
 		// Inicializa variables de cada estado
-		solParcial = new int[canciones.length];
-		for (int i=0;i<solParcial.length;i++)
-			solParcial[i] = -1;//sin asignaciones inicialmente
+		bloqueA = new ArrayList<CancionRP>();
+		bloqueB = new ArrayList<CancionRP>();
 		
-		tareaConTrabajador=new boolean[solParcial.length];
+		cancionMarcada=new boolean[canciones.length];
 		for (int i= 0; i<canciones.length; i++)
-			tareaConTrabajador[i]= false;
+			cancionMarcada[i]= false;
 		
 	}
 
@@ -55,28 +58,29 @@ public class EstadosRP extends Estado
 	public EstadosRP(EstadosRP padre,int j) {
 		super();
 		// copiamos toda la informaci�n del padre		
-		solParcial= Arrays.copyOf(padre.solParcial,canciones.length);
-		tareaConTrabajador= Arrays.copyOf(padre.tareaConTrabajador,canciones.length);
+		this.bloqueA = padre.bloqueA;
+		this.bloqueB = padre.bloqueB;
+		this.puntuacionActual = padre.puntuacionActual;
+		this.duracionActual = padre.duracionActual;
+		cancionMarcada= Arrays.copyOf(padre.cancionMarcada,canciones.length);
 		profundidad= padre.profundidad;
 		idPadre= padre.getId();
 		
 		// a�ade lo correspondiente a este hijo
-		solParcial[profundidad] =j;		// profundidad se corresponde con el primer agente sin asignar
-		tareaConTrabajador[j]= true;	// marcamos la tarea como asignada
+		cancionMarcada[j]= true;	// marcamos la tarea como asignada
 		profundidad++;
 		calcularValorHeuristico();
 		
 		// UNIFICA LOS DOS �LTIMOS NIVELES DEL �RBOL DE ESTADOS
 		if (profundidad==canciones.length-1)
 		{
-			int tareaPorAsignar= -1;
-			// Busca �ltima tarea por asignar
+			int cancionPorAsignar= -1;
 			for (int k= 0; k<canciones.length; k++)
-				if (!tareaConTrabajador[k])
-					tareaPorAsignar= k;
+				if (!cancionMarcada[k])
+					cancionPorAsignar= k;
 			
-			solParcial[profundidad] =tareaPorAsignar;		// profundidad se corresponde con el primer agente sin asignar
-			tareaConTrabajador[tareaPorAsignar]= true;	// marcamos la tarea como asignada
+			solParcial[profundidad] = cancionPorAsignar;		// profundidad se corresponde con el primer agente sin asignar
+			cancionMarcada[cancionPorAsignar]= true;	// marcamos la tarea como asignada
 			profundidad++;							
 			calcularValorHeuristico();
 		}
@@ -88,6 +92,7 @@ public class EstadosRP extends Estado
 	 */
 	@Override
 	public void calcularValorHeuristico() {
+		valorHeuristico = 0;
 		if(solucion()) {
 			valorHeuristico = puntuacionActual;
 		} else {
@@ -107,13 +112,22 @@ public class EstadosRP extends Estado
 		for (int i = 0; i <= 2; i++)
 			if (duracionActual <= tmax) {
 				if (i == 1) {
-					Estado estadoHijo1 = new EstadosRP(this, i);
-					listaHijos.add(estadoHijo1);
+					Estado estadoHijo = new EstadosRP(this, i);
+					listaHijos.add(estadoHijo);
+					
+					bloqueA.add(canciones[profundidad]);
 				}
 
 				if (i == 2) {
-					Estado estadoHijo2 = new EstadosRP(this, i);
-					listaHijos.add(estadoHijo2);
+					Estado estadoHijo = new EstadosRP(this, i);
+					listaHijos.add(estadoHijo);
+					
+					bloqueB.add(canciones[profundidad]);
+				}
+				
+				if (traza)  // imprimimos estado hijo generado
+				{
+					System.out.println("Nivel: "+profundidad+" - Hijo: "+ i);
 				}
 			}
 
@@ -132,13 +146,17 @@ public class EstadosRP extends Estado
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer("===============\n");
-		for (int i=0; i<solParcial.length; i++) 
-		{
-			if (solParcial[i] != -1)
-				sb.append("AL TRABAJADOR "+i+" SE LE ASIGNA LA TAREA "+solParcial[i]+"\n");
-			else
-				sb.append("LA TAREA "+i+" NO HA SIGO ASIGNADA TODAVIA\n");
+		
+		sb.append("Bloque A:\n");
+		for(CancionRP ca : bloqueA) {
+			sb.append(ca.getPuntuacion() + "\n");
 		}
+
+		sb.append("Bloque B:\n");
+		for(CancionRP ca : bloqueB) {
+			sb.append(ca.getPuntuacion() + "\n");
+		}
+		
 		sb.append("Valor heuristico = " + valorHeuristico + "\n");
 		sb.append("===============\n");
 		return sb.toString();

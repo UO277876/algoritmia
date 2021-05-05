@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
-
 import algestudiante.p7.util.RamificaYPoda;
 
 /**
@@ -17,13 +16,12 @@ import algestudiante.p7.util.RamificaYPoda;
  */
 class MejorListaRP extends RamificaYPoda 
 {	
-	private static boolean traza= false;
 	private static int tam = 0;
 	private static CancionRP[] canciones;
 
 	public static void main(String[] args) 
 	{
-		System.out.println("Problema de Agentes - tareas /// Ramificacion y poda");
+		System.out.println("Práctica 7 - tareas /// Ramificacion y poda");
 		// EL NOMBRE DEL FICHERO DEBE IR SIN LA TERMINACIÓN .TXT
 		//String nameFile = args[0];
 		//tam = Integer.valueOf(args[1]);
@@ -39,9 +37,6 @@ class MejorListaRP extends RamificaYPoda
 		// Soluci�n final
 		System.out.println("Solucion optima del problema $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(problemaAsigna.mejorSolucion);
-
-		if (traza)
-			problemaAsigna.mostrarTrazaSolucion(); 
 	}
 
 
@@ -51,6 +46,27 @@ class MejorListaRP extends RamificaYPoda
 	public MejorListaRP(String nameFile) 
 	{
 		readDatosFromFile(nameFile);
+		nodoRaiz = new EstadosRP(canciones,tam); //costes iniciales
+	}
+	
+	/**
+	 * Constructor crea el estaod inicial para iniciar el problema
+	 */
+	public MejorListaRP(int n) 
+	{
+		canciones = new CancionRP[n];
+		
+		int sum = 0;
+		int tiempo = 0;
+		for(int i = 0; i < n; i++) {
+			tiempo = (int) (Math.random()*((300 + 1) - 120) + 120);
+			sum += tiempo;
+
+			int puntuacion =  (int) (Math.random()*((5000 + 1) - 2000) + 2000);
+			canciones[i] = new CancionRP(tiempo,"1234",puntuacion);
+		}
+		
+		tam = sum/2;
 		nodoRaiz = new EstadosRP(canciones,tam); //costes iniciales
 	}
 	
@@ -65,7 +81,7 @@ class MejorListaRP extends RamificaYPoda
 		String line;
 		int pos = 0;
 		int index = 0;
-		String fileName = Paths.get("").toAbsolutePath().toString() + "/src/main/java/algestudiante/p6/datos/" + file
+		String fileName = Paths.get("").toAbsolutePath().toString() + "/src/main/java/algestudiante/p7/datos/" + file
 				+ ".txt";
 
 		try {
