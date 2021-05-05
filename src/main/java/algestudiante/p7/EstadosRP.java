@@ -33,6 +33,10 @@ public class EstadosRP extends Estado
 		// Guardamos el tiempo máximo y la lista de canciones
 		tmax = t*60;
 		canciones = listaCanciones;
+		
+		// Inicializamos la canción y duración actuales
+		this.duracionActual = 0;
+		this.puntuacionActual = 0;
 
 		// Inicializa variables de cada estado
 		solParcial = new int[canciones.length];
