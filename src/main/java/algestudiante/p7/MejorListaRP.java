@@ -25,8 +25,10 @@ class MejorListaRP extends RamificaYPoda
 	{
 		System.out.println("Problema de Agentes - tareas /// Ramificacion y poda");
 		// EL NOMBRE DEL FICHERO DEBE IR SIN LA TERMINACIÓN .TXT
-		String nameFile = args[0];
-		tam = Integer.valueOf(args[1]);
+		//String nameFile = args[0];
+		//tam = Integer.valueOf(args[1]);
+		String nameFile = "Lista01";
+		tam = 20;
 		
 		// Creamos una instancia para resolver el problema
 		MejorListaRP problemaAsigna = new MejorListaRP(nameFile); 
