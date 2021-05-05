@@ -8,9 +8,8 @@ public class MejorListaRPTiempos extends RamificaYPoda {
 	
 	public static void main(String[] args) {
 		long t1, t2;
-		int nVeces = 1;
-		int index = 1;
-		for (int n = 5; n < 31; n*=index) {
+		int nVeces = 1000000;
+		for (int n = 100; n < 100000000; n*=2) {
 			mj = new MejorListaRP(n);
 
 			t1 = System.currentTimeMillis();
@@ -23,7 +22,6 @@ public class MejorListaRPTiempos extends RamificaYPoda {
 
 			long tMedio = t2 - t1;
 			System.out.println(n + "\t" + tMedio);
-			index++;
 		}
 	}
 }

@@ -23,10 +23,8 @@ class MejorListaRP extends RamificaYPoda
 	{
 		System.out.println("Práctica 7 - tareas /// Ramificacion y poda");
 		// EL NOMBRE DEL FICHERO DEBE IR SIN LA TERMINACIÓN .TXT
-		//String nameFile = args[0];
-		//tam = Integer.valueOf(args[1]);
-		String nameFile = "Lista01";
-		tam = 20;
+		String nameFile = args[0];
+		tam = Integer.valueOf(args[1]);
 		
 		// Creamos una instancia para resolver el problema
 		MejorListaRP problemaAsigna = new MejorListaRP(nameFile); 
@@ -56,17 +54,14 @@ class MejorListaRP extends RamificaYPoda
 	{
 		canciones = new CancionRP[n];
 		
-		int sum = 0;
 		int tiempo = 0;
 		for(int i = 0; i < n; i++) {
 			tiempo = (int) (Math.random()*((300 + 1) - 120) + 120);
-			sum += tiempo;
 
 			int puntuacion =  (int) (Math.random()*((5000 + 1) - 2000) + 2000);
 			canciones[i] = new CancionRP(tiempo,"1234",puntuacion);
 		}
 		
-		tam = sum/2;
 		nodoRaiz = new EstadosRP(canciones,tam); //costes iniciales
 	}
 	

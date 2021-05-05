@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class RamificaYPoda 
 {
-	public static final boolean TRAZA = true;	// Activa / desactiva traza por pantalla
+	public static final boolean TRAZA = false;	// Activa / desactiva traza por pantalla
 	
 	protected ColaPrioridad cola;	// nodos pendientes de expandir 
 	protected Estado nodoRaiz;		// contiene el nodo inicial
