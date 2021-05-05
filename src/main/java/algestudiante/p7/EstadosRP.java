@@ -136,7 +136,7 @@ public class EstadosRP extends Estado
 
 	@Override
 	public boolean solucion() {
-		if (profundidad == canciones.length)
+		if (profundidad == canciones.length + 1)
 			return true;
 		else
 			return false;
